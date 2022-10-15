@@ -74,6 +74,52 @@ class LinkList:
         #python有垃圾回收机制，不用去管
         self.head.next = None
 
+    #获取某个索引的值
+    def get_item(self, item):
+        #让P指向第一个节点，这样才会第一个数据为0
+        p = self.head.next
+        n = 0
+        #没有到对应的索引且遍历索引没有到最后就循环
+        #and：一个为假，全部为假.or :一个为真，全为真
+        while n < item and p is not None:
+            p = p.next
+            n += 1
+        #如果因为P到了最后，则说明越界
+        if p is None:
+            #主动报错
+            raise IndexError("list index out of range")
+        #不小于索引，说明找到了索引节点。
+        return p.value
+
+    #在某个索引位置插入数据
+    def insert(self,index,val):
+        #self.get_length() ,可以在后面插入
+        if index< 0 or index > self.get_length():
+            raise IndexError("list index out of range")
+        p = self.head
+        i = 0
+        #让p移动到待插入位置的前一个
+        while i < index:
+            p = p.next
+            i += 1
+        #创建新的节点
+        p_new = Node(val)
+        # 将新节点的next 等于下一个节点
+        p_new.next = p.next
+        # 将新节点赋给前一个节点的next
+        p.next = p_new
+
+    #根据值删除链表中的某一个节点
+    def delete(self,item):
+        p = self.head
+        while p.next is not None:
+            #如果值相等，则越过中间的节点
+            if p.next.value == item:
+                p.next = p.next.next
+                break
+            p = p.next
+        else:
+            raise ValueError("%d not in list"%item)
 
 
 
@@ -95,8 +141,14 @@ if __name__ == '__main__':
     #清空链表
     # link.clear()
     # print(link.is_empty())
+    #获取某个节点值
+    print(link.get_item(3))
 
-
+    #在某个索引位置插入数据
+    link.insert(5,10)
+    link.show()
+    link.delete(30)
+    link.show()
 
 
 
