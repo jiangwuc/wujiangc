@@ -48,6 +48,9 @@ class LStack:
             raise  LStackError("stack is empty")
         return self._top.value
 
+    #清空栈
+    def clear(self):
+        self._top = None
 
 
 
