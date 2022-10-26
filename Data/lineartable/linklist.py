@@ -147,7 +147,7 @@ if __name__ == '__main__':
     #在某个索引位置插入数据
     link.insert(5,10)
     link.show()
-    link.delete(30)
+    # link.delete(30)
     link.show()
 
 
